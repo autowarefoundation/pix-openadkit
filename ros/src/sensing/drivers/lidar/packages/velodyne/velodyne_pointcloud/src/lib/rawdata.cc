@@ -190,7 +190,10 @@ namespace velodyne_rawdata
              ||(config_.min_angle > config_.max_angle 
              && (raw->blocks[i].rotation <= config_.max_angle 
              || raw->blocks[i].rotation >= config_.min_angle))){
-          float distance = tmp.uint * DISTANCE_RESOLUTION;
+
+	   // quick and dirty: DISTANCE_RESOLUTION for VLP32C is 0.004
+//        float distance = tmp.uint * DISTANCE_RESOLUTION;
+	  float distance = tmp.uint * 0.004;
           distance += corrections.dist_correction;
   
           float cos_vert_angle = corrections.cos_vert_correction;

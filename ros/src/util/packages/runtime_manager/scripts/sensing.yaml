@@ -38,6 +38,12 @@ subs :
         run  : roslaunch autoware_pointgrey_drivers ladybug.launch
         param: ladybug_params
 
+      - name : MindVision camera
+        desc : Mind vision Generic desc sample
+        probe: 
+        run  : roslaunch mv_camera_ros mv-camera-ros.launch
+
+
       - name : USB Generic
         desc : USB Generic desc sample
         probe: 'lsusb -v | grep wTerminalType | grep "Camera Sensor" > /dev/null'
