@@ -49,6 +49,18 @@ repositories:
     type: git
     url: https://github.com/tier4/pointcloud_to_laserscan.git
     version: tier4/main
+  universe/external/eagleye:
+    type: git
+    url: https://github.com/MapIV/eagleye.git
+    version: autoware-main
+  universe/external/rtklib_ros_bridge:
+    type: git
+    url: https://github.com/MapIV/rtklib_ros_bridge.git
+    version: ros2-v0.1.0
+  universe/external/llh_converter:
+    type: git
+    url: https://github.com/MapIV/llh_converter.git
+    version: ros2
   # launcher
   launcher/autoware_launch:
     type: git
@@ -67,6 +79,30 @@ repositories:
     type: git
     url: https://github.com/tier4/velodyne_vls.git
     version: tier4/universe
+  sensor_component/external/ros2_socketcan:
+    type: git
+    url: https://github.com/autowarefoundation/ros2_socketcan.git
+    version: 1.1.0
+  sensor_component/external/nmea_navsat_driver:
+    type: git
+    url: https://github.com/pixmoving-moveit/nmea_navsat_driver.git
+    version: ros2
+  sensor_component/external/ultra_sonic_radar_driver:
+    type: git
+    url: https://github.com/pixmoving-moveit/ultra_sonic_radar_driver.git
+    version: ros2
+  sensor_component/external/ars408_driver:
+    type: git
+    url: https://github.com/tier4/ars408_driver.git
+    version: main
+  sensor_component/external/rslidar_sdk:
+    type: git
+    url: https://github.com/pixmoving-moveit/rslidar_sdk.git
+    version: main
+  sensor_component/external/rslidar_msg:
+    type: git
+    url: https://github.com/RoboSense-LiDAR/rslidar_msg.git
+    version: main 
   # sensor_kit
   sensor_kit/sample_sensor_kit_launch:
     type: git
@@ -75,6 +111,14 @@ repositories:
   sensor_kit/external/awsim_sensor_kit_launch: # TODO: Integrate into sample_sensor_kit_launch
     type: git
     url: https://github.com/RobotecAI/awsim_sensor_kit_launch.git
+    version: main
+  sensor_kit/external/pixkit_sensor_kit_launch:
+    type: git
+    url: https://github.com/pixmoving-moveit/pixkit_sensor_kit_launch.git
+    version: main
+  sensor_kit/external/robobus_sensor_kit_launch:
+    type: git
+    url: https://github.com/pixmoving-moveit/robobus_sensor_kit_launch.git
     version: main
   # vehicle
   vehicle/sample_vehicle_launch:
@@ -85,8 +129,20 @@ repositories:
     type: git
     url: https://github.com/tier4/pacmod_interface.git
     version: main
+  vehicle/external/pix_driver:
+    type: git
+    url: https://github.com/pixmoving-moveit/pix_driver.git
+    version: main
+  vehicle/pixkit_launch:
+    type: git
+    url: https://github.com/pixmoving-moveit/pixkit_launch.git
+    version: main
+  vehicle/robobus_launch:
+    type: git
+    url: https://github.com/pixmoving-moveit/robobus_launch.git
+    version: main
   # param
   param/autoware_individual_params:
     type: git
-    url: https://github.com/autowarefoundation/autoware_individual_params.git
-    version: main
+    url: https://github.com/pixmoving-moveit/autoware_individual_params.git
+    version: feature/robobus_sensors
