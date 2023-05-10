@@ -132,7 +132,7 @@ repositories:
   vehicle/external/pix_driver:
     type: git
     url: https://github.com/pixmoving-moveit/pix_driver.git
-    version: main
+    version: robobus
   vehicle/pixkit_launch:
     type: git
     url: https://github.com/pixmoving-moveit/pixkit_launch.git
