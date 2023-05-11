@@ -95,14 +95,10 @@ repositories:
     type: git
     url: https://github.com/tier4/ars408_driver.git
     version: main
-  sensor_component/external/rslidar_sdk:
+  sensor_component/external/ouster-ros:
     type: git
-    url: https://github.com/pixmoving-moveit/rslidar_sdk.git
-    version: main
-  sensor_component/external/rslidar_msg:
-    type: git
-    url: https://github.com/RoboSense-LiDAR/rslidar_msg.git
-    version: main 
+    url: https://github.com/ouster-lidar/ouster-ros.git
+    version: ros2
   # sensor_kit
   sensor_kit/sample_sensor_kit_launch:
     type: git
