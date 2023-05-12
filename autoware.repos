@@ -99,6 +99,10 @@ repositories:
     type: git
     url: https://github.com/ouster-lidar/ouster-ros.git
     version: ros2
+  sensor_component/external/flir_spinnaker_ros2:
+    type: git
+    url: https://github.com/berndpfrommer/flir_spinnaker_ros2.git
+    version: main
   # sensor_kit
   sensor_kit/sample_sensor_kit_launch:
     type: git
@@ -115,10 +119,6 @@ repositories:
   sensor_kit/external/robobus_sensor_kit_launch:
     type: git
     url: https://github.com/pixmoving-moveit/robobus_sensor_kit_launch.git
-    version: main
-  sensor_kit/external/flir_spinnaker_ros2:
-    type: git
-    url: https://github.com/berndpfrommer/flir_spinnaker_ros2.git
     version: main
   # vehicle
   vehicle/sample_vehicle_launch:
