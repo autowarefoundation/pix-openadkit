@@ -102,7 +102,20 @@ repositories:
   sensor_component/external/flir_spinnaker_ros2:
     type: git
     url: https://github.com/berndpfrommer/flir_spinnaker_ros2.git
-    version: main
+    version: master
+  sensor_component/external/flir_spinnaker_common:
+    type: git
+    url: https://github.com/berndpfrommer/flir_spinnaker_common.git
+    version: master
+  sensor_component/external/image_meta_msgs_ros2:
+    type: git
+    url: https://github.com/berndpfrommer/image_meta_msgs_ros2.git
+    version: master
+  sensor_component/external/camera_control_msgs_ros2:
+    type: git
+    url: https://github.com/berndpfrommer/camera_control_msgs_ros2.git
+    version: master
+
   # sensor_kit
   sensor_kit/sample_sensor_kit_launch:
     type: git
