@@ -23,7 +23,7 @@ repositories:
   # universe
   universe/autoware.universe:
     type: git
-    url: https://github.com/autowarefoundation/autoware.universe.git
+    url: https://github.com/pixmoving-moveit/autoware.universe.git
     version: 3d8ed94fdbfd07d38ebd3a001bad87124884c920
   universe/external/tier4_ad_api_adaptor:
     type: git
@@ -52,7 +52,7 @@ repositories:
   # launcher
   launcher/autoware_launch:
     type: git
-    url: https://github.com/autowarefoundation/autoware_launch.git
+    url: https://github.com/pixmoving-moveit/autoware_launch.git
     version: 133a3d94b87ff7278f1b0585747b762609c645e1
   # sensor_component
   sensor_component/external/sensor_component_description:
