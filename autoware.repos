@@ -98,7 +98,7 @@ repositories:
   sensor_component/external/ultra_sonic_radar_driver:
     type: git
     url: https://github.com/pixmoving-moveit/ultra_sonic_radar_driver.git
-    version: ros2
+    version: main
   sensor_component/external/ars408_driver:
     type: git
     url: https://github.com/tier4/ars408_driver.git
