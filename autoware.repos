@@ -10,21 +10,21 @@ repositories:
     version: main
   core/autoware_common:
     type: git
-    url: https://github.com/autowarefoundation/autoware_common.git
-    version: main
+    url: https://github.com/pixmoving-moveit/autoware_common.git
+    version: feature/sweeping
   core/autoware.core:
     type: git
     url: https://github.com/autowarefoundation/autoware.core.git
     version: main
   core/external/autoware_auto_msgs:
     type: git
-    url: https://github.com/tier4/autoware_auto_msgs.git
-    version: tier4/main
+    url: https://github.com/pixmoving-moveit/autoware_auto_msgs.git
+    version: pix/sweeper
   # universe
   universe/autoware.universe:
     type: git
     url: https://github.com/pixmoving-moveit/autoware.universe.git
-    version: mirror_main
+    version: feature/sweepping_planning
   universe/external/tier4_ad_api_adaptor:
     type: git
     url: https://github.com/tier4/tier4_ad_api_adaptor.git
