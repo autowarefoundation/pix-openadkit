@@ -36,10 +36,10 @@ print_help() {
     echo -e "Options:"
     echo -e "  ${GREEN}--help/-h${NC}       Display this help message"
     echo -e "  ${GREEN}--map-path${NC}      Specify to mount map files into /autoware_map (mandatory if no custom launch command is provided)"
-    echo -e "  ${GREEN}--no-nvidia${NC}     Disable NVIDIA GPU support"
     echo -e "  ${GREEN}--devel${NC}         Launch the latest Autoware development environment with shell access"
+    echo -e "  ${GREEN}--workspace${NC}     (--devel only)Specify the directory to mount into /workspace, by default it uses current directory (pwd) as workspace"
+    echo -e "  ${GREEN}--no-nvidia${NC}     Disable NVIDIA GPU support"
     echo -e "  ${GREEN}--headless${NC}      Run Autoware in headless mode (default: false)"
-    echo -e "  ${GREEN}--workspace${NC}     Specify to mount the workspace into /workspace"
     echo ""
 }
 
@@ -93,16 +93,12 @@ set_variables() {
         # Set image based on option
         IMAGE="ghcr.io/autowarefoundation/autoware:latest-devel"
 
-        # Set workspace path
+        # Set workspace path, if not provided use the current directory
         if [ "$WORKSPACE_PATH" = "" ]; then
-            echo -e "\n------------------------------------------------------------"
-            echo -e "${RED}Note:${NC} The --workspace option is mandatory for the --devel option."
-            echo -e "------------------------------------------------------------"
-            exit 1
-        else
-            USER_ID="-e LOCAL_UID=$(id -u) -e LOCAL_GID=$(id -g) -e LOCAL_USER=$(id -un) -e LOCAL_GROUP=$(id -gn)"
-            WORKSPACE="-v ${WORKSPACE_PATH}:/workspace"
+            WORKSPACE_PATH=$(pwd)
         fi
+        USER_ID="-e LOCAL_UID=$(id -u) -e LOCAL_GID=$(id -g) -e LOCAL_USER=$(id -un) -e LOCAL_GROUP=$(id -gn)"
+        WORKSPACE="-v ${WORKSPACE_PATH}:/workspace"
 
         # Set launch command
         LAUNCH_CMD="/bin/bash"
