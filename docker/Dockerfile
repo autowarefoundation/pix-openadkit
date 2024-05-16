@@ -30,7 +30,7 @@ WORKDIR /autoware
 
 # Set up base environment
 RUN --mount=type=ssh \
-  ./setup-dev-env.sh -y --module base --runtime openadk \
+  ./setup-dev-env.sh -y --module base --runtime openadkit \
   && pip uninstall -y ansible ansible-core \
   && pip install --no-cache-dir vcstool \
   && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* "$HOME"/.cache \
@@ -50,7 +50,7 @@ ENV CXX="/usr/lib/ccache/g++"
 # cspell: ignore libcu libnv
 # Set up development environment
 RUN --mount=type=ssh \
-  ./setup-dev-env.sh -y --module all ${SETUP_ARGS} --no-cuda-drivers openadk \
+  ./setup-dev-env.sh -y --module all ${SETUP_ARGS} --no-cuda-drivers openadkit \
   && pip uninstall -y ansible ansible-core \
   && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* "$HOME"/.cache \
   && find / -name 'libcu*.a' -delete \
@@ -84,12 +84,12 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install development tools and artifacts
 RUN --mount=type=ssh \
-  ./setup-dev-env.sh -y --module dev-tools --download-artifacts openadk \
+  ./setup-dev-env.sh -y --module dev-tools --download-artifacts openadkit \
   && pip uninstall -y ansible ansible-core \
   && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* "$HOME"/.cache
 
 # Create entrypoint
-COPY docker/autoware/etc/ros_entrypoint.sh /ros_entrypoint.sh
+COPY docker/etc/ros_entrypoint.sh /ros_entrypoint.sh
 RUN chmod +x /ros_entrypoint.sh
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["/bin/bash"]
@@ -103,7 +103,7 @@ ARG SETUP_ARGS
 # Set up runtime environment and artifacts
 COPY autoware.repos /autoware/
 RUN --mount=type=ssh \
-  ./setup-dev-env.sh -y --module all ${SETUP_ARGS} --download-artifacts --no-cuda-drivers --runtime openadk \
+  ./setup-dev-env.sh -y --module all ${SETUP_ARGS} --download-artifacts --no-cuda-drivers --runtime openadkit \
   && pip uninstall -y ansible ansible-core \
   && mkdir src \
   && vcs import src < autoware.repos \
@@ -123,11 +123,11 @@ RUN --mount=type=ssh \
 COPY --from=prebuilt /autoware/install/ /autoware/install/
 
 # Copy bash aliases
-COPY docker/autoware/etc/.bash_aliases /root/.bash_aliases
+COPY docker/etc/.bash_aliases /root/.bash_aliases
 RUN echo "source /autoware/install/setup.bash" > /etc/bash.bashrc
 
 # Create entrypoint
-COPY docker/autoware/etc/ros_entrypoint.sh /ros_entrypoint.sh
+COPY docker/etc/ros_entrypoint.sh /ros_entrypoint.sh
 RUN chmod +x /ros_entrypoint.sh
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
