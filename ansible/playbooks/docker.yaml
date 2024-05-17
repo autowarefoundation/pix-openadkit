@@ -1,4 +1,5 @@
-- hosts: localhost
+- name: Set up Docker development environments for Autoware
+  hosts: localhost
   connection: local
   vars_prompt:
     - name: prompt_install_nvidia
@@ -20,7 +21,6 @@
       when: prompt_install_nvidia != 'y'
   roles:
     - role: autoware.dev_env.cuda
-      when: prompt_install_nvidia == 'y' and install_devel == 'true'
+      when: prompt_install_nvidia == 'y'
     - role: autoware.dev_env.docker_engine
-    - role: autoware.dev_env.nvidia_docker
-    - role: autoware.dev_env.rocker
+    - role: autoware.dev_env.nvidia_container_toolkit
