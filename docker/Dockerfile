@@ -108,7 +108,7 @@ RUN source /opt/ros/"$ROS_DISTRO"/setup.bash \
     " --no-warn-unused-cli" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-    -DCMAKE_CXX_FLAGS="-Wno-error" \
+    -DCMAKE_CXX_FLAGS="-w" \
   && find /autoware/install -type d -exec chmod 777 {} \; \
   && chmod -R 777 /var/tmp/ccache \
   && rm -rf /autoware/build /autoware/src
