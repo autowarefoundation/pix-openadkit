@@ -5,22 +5,12 @@ FROM $BASE_IMAGE as base
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 ARG ROS_DISTRO
 
-# Install apt packages
+# Install apt packages and add GitHub to known hosts for private repositories
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
-  git \
-  ssh \
-  wget \
-  cmake \
-  curl \
   gosu \
-  gnupg \
-  vim \
-  unzip \
-  lsb-release \
-  && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* "$HOME"/.cache
-
-# Add GitHub to known hosts for private repositories
-RUN mkdir -p ~/.ssh \
+  ssh \
+  && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/* "$HOME"/.cache \
+  && mkdir -p ~/.ssh \
   && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 # Copy files
@@ -57,7 +47,7 @@ WORKDIR /autoware
 COPY autoware.repos /autoware/
 RUN --mount=type=ssh \
   mkdir src \
-  && vcs import src < autoware.repos --recursive 
+  && vcs import src < autoware.repos
 
 # Generate install package lists
 RUN rosdep update && rosdep keys --ignore-src --from-paths src \
@@ -108,7 +98,6 @@ RUN source /opt/ros/"$ROS_DISTRO"/setup.bash \
     " --no-warn-unused-cli" \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-    -DCMAKE_CXX_FLAGS="-w" \
   && find /autoware/install -type d -exec chmod 777 {} \; \
   && chmod -R 777 /var/tmp/ccache \
   && rm -rf /autoware/build /autoware/src

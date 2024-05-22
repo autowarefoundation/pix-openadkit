@@ -5,6 +5,9 @@ inputs:
   bake-target:
     description: ""
     required: true
+  bake-images:
+    description: ""
+    required: false
   build-args:
     description: ""
     required: false
@@ -117,6 +120,8 @@ runs:
           ${{ steps.meta-devel.outputs.bake-file }}
           ${{ steps.meta-runtime.outputs.bake-file }}
         provenance: false
+        targets: |
+          ${{ inputs.bake-images }}
         set: |
           ${{ inputs.build-args }}
 
@@ -132,8 +137,11 @@ runs:
           ${{ steps.meta-devel.outputs.bake-file }}
           ${{ steps.meta-runtime.outputs.bake-file }}
         provenance: false
+        targets: |
+          ${{ inputs.bake-images }}
         set: |
           ${{ inputs.build-args }}
+          base.output=type=docker,dest=/tmp/base.tar
           prebuilt.output=type=docker,dest=/tmp/prebuilt.tar
           devel.output=type=docker,dest=/tmp/devel.tar
           runtime.output=type=docker,dest=/tmp/runtime.tar
@@ -148,7 +156,7 @@ runs:
         retention-days: 7
         compression-level: 6
         overwrite: true
-        if-no-files-found: error
+        if-no-files-found: warn
 
     - name: Upload Artifact - prebuilt
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.artifacts-destination == 'tarball' }}
@@ -160,7 +168,7 @@ runs:
         retention-days: 7
         compression-level: 6
         overwrite: true
-        if-no-files-found: error
+        if-no-files-found: warn
 
     - name: Upload Artifact - devel
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.artifacts-destination == 'tarball' }}
@@ -172,7 +180,7 @@ runs:
         retention-days: 7
         compression-level: 6
         overwrite: true
-        if-no-files-found: error
+        if-no-files-found: warn
 
     - name: Upload Artifact - runtime
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.artifacts-destination == 'tarball' }}
@@ -184,7 +192,7 @@ runs:
         retention-days: 7
         compression-level: 6
         overwrite: true
-        if-no-files-found: error
+        if-no-files-found: warn
 
     - name: Output artifact URLs
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.artifacts-destination == 'tarball' }}

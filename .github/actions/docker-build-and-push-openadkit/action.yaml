@@ -5,6 +5,9 @@ inputs:
   bake-target:
     description: ""
     required: true
+  bake-images:
+    description: ""
+    required: false
   build-args:
     description: ""
     required: false
@@ -106,6 +109,8 @@ runs:
           ${{ steps.meta-visualizer.outputs.bake-file }}
           ${{ steps.meta-simulator.outputs.bake-file }}
         provenance: false
+        targets: |
+          ${{ inputs.bake-images }}
         set: |
           ${{ inputs.build-args }}
 
@@ -120,6 +125,8 @@ runs:
           ${{ steps.meta-visualizer.outputs.bake-file }}
           ${{ steps.meta-simulator.outputs.bake-file }}
         provenance: false
+        targets: |
+          ${{ inputs.bake-images }}
         set: |
           ${{ inputs.build-args }}
           planning-control.output=type=docker,dest=/tmp/planning-control.tar
@@ -136,7 +143,7 @@ runs:
         retention-days: 7
         compression-level: 6
         overwrite: true
-        if-no-files-found: error
+        if-no-files-found: warn
 
     - name: Upload Artifact - visualizer
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.artifacts-destination == 'tarball' }}
@@ -148,7 +155,7 @@ runs:
         retention-days: 7
         compression-level: 6
         overwrite: true
-        if-no-files-found: error
+        if-no-files-found: warn
 
     - name: Upload Artifact - simulator
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.artifacts-destination == 'tarball' }}
@@ -160,7 +167,7 @@ runs:
         retention-days: 7
         compression-level: 6
         overwrite: true
-        if-no-files-found: error
+        if-no-files-found: warn
 
     - name: Output artifact URLs
       if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.artifacts-destination == 'tarball' }}

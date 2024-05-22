@@ -43,10 +43,12 @@ jobs:
             lib_dir: x86_64
             setup-args: --no-nvidia
             additional-tag-suffix: ""
+            bake-images: default
           - name: cuda
             base_image_env: base_image
             lib_dir: x86_64
             additional-tag-suffix: -cuda
+            bake-images: prebuilt,devel,runtime
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -67,9 +69,11 @@ jobs:
           tag-suffix: ${{ matrix.additional-tag-suffix }}
           tag-arch: -amd64
           tag-prefix: ${{ needs.load-env.outputs.rosdistro }}
+          bake-images: ${{ matrix.bake-images }}
           allow-push: true
 
       - name: Build 'Openadkit'
+        if: ${{ matrix.name == 'no-cuda' }}
         uses: ./.github/actions/docker-build-and-push-openadkit
         with:
           bake-target: openadkit
@@ -79,10 +83,11 @@ jobs:
             *.args.BASE_IMAGE=${{ needs.load-env.outputs[format('{0}', matrix.base_image_env)] }}
             *.args.SETUP_ARGS=${{ matrix.setup-args }}
             *.args.LIB_DIR=${{ matrix.lib_dir }}
-            *.args.ARCH: amd64
+            *.args.ARCH=amd64
           tag-suffix: ${{ matrix.additional-tag-suffix }}
           tag-arch: -amd64
           tag-prefix: ${{ needs.load-env.outputs.rosdistro }}
+          bake-images: ${{ matrix.bake-images }}
           allow-push: true
 
       - name: Show disk space
