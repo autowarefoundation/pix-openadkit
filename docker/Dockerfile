@@ -47,7 +47,7 @@ WORKDIR /autoware
 COPY autoware.repos /autoware/
 RUN --mount=type=ssh \
   mkdir src \
-  && vcs import src < autoware.repos
+  && vcs import src < autoware.repos --recursive 
 
 # Generate install package lists
 RUN rosdep update && rosdep keys --ignore-src --from-paths src \
